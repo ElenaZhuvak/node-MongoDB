@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
 import {
   createProductService,
+  deleteProductService,
   getAllProductsService,
   getProductByIdService,
   updateProductService,
@@ -41,17 +42,33 @@ export const createProductController = async (req, res) => {
 };
 
 export const updateProductController = async (req, res) => {
-    const payload = req.body;
-    const {productId} = req.params;
-    const newProduct = await updateProductService(productId, payload, {new: true});
+  const payload = req.body;
+  const { productId } = req.params;
+  const newProduct = await updateProductService(productId, payload, {
+    new: true,
+  });
 
-    if (!newProduct) {
-        throw createHttpError(400, 'Product not found');
-    }
-    
-    res.json({
-        status: 200,
-        message: 'Product updated successfully',
-        data: newProduct,
-    });
+  if (!newProduct) {
+    throw createHttpError(400, 'Product not found');
+  }
+
+  res.json({
+    status: 200,
+    message: 'Product updated successfully',
+    data: newProduct,
+  });
+};
+
+export const deleteProductController = async (req, res) => {
+  const { productId } = req.params;
+  const product = await deleteProductService(productId);
+
+  if(!product) {
+    throw createHttpError(404, 'Product not found');
+  }
+
+  res.json({
+    status: 204,
+    message: `Product with ${productId} deleted successfully`
+  });
 };
