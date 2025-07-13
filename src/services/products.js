@@ -7,3 +7,7 @@ export const getAllProductsService = () => {
 export const getProductByIdService = (productId) => {
     return ProductModel.findById(productId);
 };
+
+export const createProductService = (payload) => {
+    return ProductModel.create(payload);
+};
