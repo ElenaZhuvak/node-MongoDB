@@ -6,9 +6,14 @@ import {
   getProductByIdService,
   updateProductService,
 } from '../services/products.js';
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getAllProductsController = async (req, res) => {
-  const products = await getAllProductsService();
+  const {category, minPrice, maxPrice} = parseFilterParams(req.query);
+  const products = await getAllProductsService({category, minPrice, maxPrice});
+
+  // console.log({category, minPrice, maxPrice});
+
   res.json({
     status: 200,
     message: 'Successfully find products',

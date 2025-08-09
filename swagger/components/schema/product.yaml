@@ -1,0 +1,32 @@
+type: object
+required:
+  - _id
+  - name
+  - price
+  - category
+properties:
+  _id:
+    description: "Product's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "Product's name"
+    type: string
+    example: 'iPhone'
+  price:
+    description: "Product's price"
+    type: number
+    example: 100
+  category:
+    description: "Product's category"
+    type: string
+    enum: ['books', 'electronics', 'clothing', 'other']
+    example: other
+  createAt:
+    description: "Time create a product"
+    type: string
+    example: "2024-03-10T14:00:00.000Z"
+  updateAt:
+    description: "Time update a product"
+    type: string
+    example: "2024-05-15T09:15:00.000Z"
